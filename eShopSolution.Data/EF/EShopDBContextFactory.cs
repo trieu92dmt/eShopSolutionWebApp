@@ -12,16 +12,15 @@ namespace eShopSolution.Data.EF
     {
         public EShopDBContext CreateDbContext(string[] args)
         {
-            //IConfigurationRoot configuration = new ConfigurationBuilder()
-            //    .SetBasePath(Directory.GetCurrentDirectory())
-            //    .AddJsonFile("appsettings.json")
-            //    .Build();
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
 
-            //var connectionString = configuration.GetConnectionString("eShopSolutionDb");
+            var connectionString = configuration.GetConnectionString("eShopSolutionDb");
 
             var optionsBuilder = new DbContextOptionsBuilder<EShopDBContext>();
-            //optionsBuilder.UseSqlServer(connectionString);
-            optionsBuilder.UseSqlServer(@"Server=MINHTRIEU\SQLEXPRESS01;Database=eShopSolution;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(connectionString);
 
             return new EShopDBContext(optionsBuilder.Options);
         }
